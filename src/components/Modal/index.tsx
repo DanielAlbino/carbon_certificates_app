@@ -9,7 +9,7 @@ function Modal({ setToggle, toggle, setFavoriteCerts, favoriteCerts }: any) {
     setFavoriteCerts([...tempFavoriteCerts]);
   };
 
-  const copyCertificateId = (uniqueID: any) => {
+  const copyCertificateId = (uniqueID: string) => {
     navigator.clipboard.writeText(uniqueID);
   };
 
@@ -43,6 +43,7 @@ function Modal({ setToggle, toggle, setFavoriteCerts, favoriteCerts }: any) {
                 <tr>
                   <th scope="col">UNIQUEID</th>
                   <th scope="col">ORIGINATOR</th>
+                  <th scope="col">OWNER</th>
                   <th scope="col">STATUS</th>
                   <th scope="col" style={{ width: 150 }}></th>
                 </tr>
@@ -50,13 +51,13 @@ function Modal({ setToggle, toggle, setFavoriteCerts, favoriteCerts }: any) {
               <tbody>
                 {tempFavoriteCerts
                   ?.filter(
-                    (certs: any) =>
+                    (certs: FilteredData) =>
                       certs.uniqueID.includes(searchCertificate) ||
                       certs.originator.includes(searchCertificate) ||
-                      certs.status.includes(searchCertificate.toLowerCase())
+                      certs.status.includes(searchCertificate)
                   )
-                  .map((cert: any, index: string) => (
-                    <tr id={index} className="certificate">
+                  .map((cert: FilteredData, index: string) => (
+                    <tr id={index} key={index}className="certificate">
                       <th
                         style={{ cursor: "pointer" }}
                         onClick={() => {
@@ -67,13 +68,14 @@ function Modal({ setToggle, toggle, setFavoriteCerts, favoriteCerts }: any) {
                         title="Click to copy the certificate ID"
                       >{`${cert.uniqueID.substr(0, 30)}...`}</th>
                       <td>{cert.originator}</td>
+                      <td>{cert.owner}</td>
                       <td>{cert.status}</td>
                       <td
                         style={{ cursor: "pointer" }}
                         onClick={() =>
                           setTempFavoriteCerts([
                             ...tempFavoriteCerts.filter(
-                              (obj: any) => obj.uniqueID !== cert.uniqueID
+                              (obj: FilteredData) => obj.uniqueID !== cert.uniqueID
                             ),
                           ])
                         }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
 
-function Header(props: any) {
+function Header(props: HeaderProps) {
   const { favoriteCertificates, setToggle } = props;
 
 

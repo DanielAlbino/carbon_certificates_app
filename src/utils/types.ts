@@ -34,3 +34,8 @@ type TableProps = {
   setFavoriteCerts: any;
   favoriteCerts: Array<FilteredData>;
 };
+
+type HeaderProps = {
+  favoriteCertificates: Array<FilteredData>;
+  setToggle: any;
+};
