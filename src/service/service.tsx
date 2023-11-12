@@ -1,27 +1,27 @@
 export async function getCertificatesDate() {
-  const data = await fetch("https://demo.api.agreena.com/api/public/carbon_registry/v1/certificates?includeMeta=true", {
+  const data: Array<Data> = await fetch(process.env.REACT_APP_API_URL, {
     headers: {
       "Content-Type": "application/json",
-      "API_ACCESS_TOKEN":"Commoditrader-React-FE-Farmer",
+      API_ACCESS_TOKEN: process.env.REACT_APP_ACCESS_TOKEN,
     },
-  }).then(result => result.json()).then(({result}) => result.data);
-  
-  return filterData(data)
+  })
+    .then((result) => result.json())
+    .then(({ result }) => result.data);
+
+  return filterData(data);
 }
 
-
-function filterData(data: any){
-    const filteredData: any = []
-    data.map((obj: any) => {
-        filteredData.push({
-            uniqueID: obj.uniqueNumber,
-            originator: obj.companyName,
-            originatorCountry: obj.countryCode,
-            owner: obj.carbonUser.company.name,
-            ownerCountry: obj.carbonUser.company.address.country ,
-            status: obj.validity
-
-        })
-    })
-    return filteredData;
+function filterData(data: Array<Data>) {
+  const filteredData: Array<FilteredData> = [];
+  data.map((obj: Data) => {
+    filteredData.push({
+      uniqueID: obj.uniqueNumber,
+      originator: obj.companyName,
+      originatorCountry: obj.countryCode,
+      owner: obj.carbonUser.company.name,
+      ownerCountry: obj.carbonUser.company.address.country,
+      status: obj.validity,
+    });
+  });
+  return filteredData;
 }

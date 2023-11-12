@@ -1,0 +1,9 @@
+.bg-color{
+    background-color: rgba(0,0,0,0.3) !important;
+}
+
+.modal-content{
+    width: 50vw !important;
+    height: 90vh;
+    margin-left: -80px;
+}
