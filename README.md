@@ -16,6 +16,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Please add the .env file to the project with following parameters:
 
 REACT_APP_ACCESS_TOKEN = your-token
+
 REACT_APP_API_URL = url-to-your-api
 
 The page will reload if you make edits.\
